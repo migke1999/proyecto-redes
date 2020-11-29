@@ -1,0 +1,12 @@
+agm-map{
+    width: 100%;
+    height: 350px;
+}
+
+#labelEsp {
+margin: 10px;
+}
+#inputEsp {
+   width: 95%;
+   margin-left: 2.5%;
+}

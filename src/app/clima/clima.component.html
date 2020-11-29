@@ -1,0 +1,21 @@
+<div class="card" style="margin:1rem">
+    <div class="card-header">
+        <span class="text-uppercase">Editar lugar</span>
+    </div>
+
+    <div class="form-group">
+        <label id="labelEsp">Ingresa direccion</label>
+        <input type="text" id="inputEsp" class="form-control" (keydown.enter)="$event.preventDefault()"
+          placeholder="Buscar localizacion" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+      </div>
+    <div class="card-body" >
+        
+        <agm-map (mapReady)="fnInitMap()" [latitude]="lat" [longitude]="lng" [zoom]="zoom"  >
+          <agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'"  [markerDraggable]="true"  (dragEnd)="markerDragEnd($event)"></agm-marker>
+        </agm-map> 
+      <!--  <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map> -->
+        <button class="btn btn-primary mt-3" type="button" (click)="fnSavePlace()">Guardar</button>
+      </div>
+</div>
