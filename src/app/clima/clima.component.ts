@@ -42,7 +42,7 @@ export class ClimaComponent implements OnInit {
     // tslint:disable-next-line: new-parens
     this.geoCoder = new google.maps.Geocoder;
     let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-    console.log("si genera autocomplete", autocomplete);
+    // console.log("si genera autocomplete", autocomplete);
     autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           let place = autocomplete.getPlace();
