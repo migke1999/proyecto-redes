@@ -1,6 +1,6 @@
 <body>
 <div class="card" style="margin:1rem;">
-    <div class="card-header">
+    <div class="card-header"> 
         <span class="text-uppercase">Editar lugar</span>
     </div>
 
@@ -17,7 +17,31 @@
       <!--  <agm-map [latitude]="lat" [longitude]="lng">
             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
           </agm-map> -->
-        <button class="btn btn-primary mt-3" type="button" (click)="fnSavePlace()">Consultar</button>
+        <button class="btn btn-primary mt-3" type="button" (click)="fnGetWeather()">Consultar</button>
       </div>
 </div>
+
+  <div *ngIf="currentWeather"class="card" style="margin: 1rem;">
+    <div class="card-header">
+      <h3>Clima en Vivo</h3>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        
+        <p>Temperatura: {{currentWeather.main.temp}} Grados Kelvin</p>
+        
+        <p>Sensación térmica: {{currentWeather.main.feels_like}} Grados Kelvin</p>
+    
+        <p>Humedad: {{currentWeather.main.humidity}}%</p>
+        <br>
+        <p>En {{currentWeather.name}},{{currentWeather.sys.country}}</p>
+        <footer class="blockquote-footer">Consultado en: <cite title="Source Title">Climalife</cite></footer>
+      </blockquote>
+    </div>
+  </div>
+
+  
+ 
+
+
 </body>

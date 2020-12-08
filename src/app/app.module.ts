@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { AgmCoreModule } from '@agm/core';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 // tslint:disable-next-line: one-variable-per-declaration
 
@@ -37,6 +38,7 @@ const config = {
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule, // auth
     AppRoutingModule,

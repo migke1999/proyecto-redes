@@ -1,6 +1,8 @@
+import { WeatherService } from './../services/weather.service';
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-clima',
@@ -13,6 +15,7 @@ export class ClimaComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private location: Location,
+    private weatherService: WeatherService
   ) { }
 
   lat: number = 21.9197223;
@@ -22,6 +25,7 @@ export class ClimaComponent implements OnInit {
   varesp2: any; 
   address: string;
   private geoCoder;
+  currentWeather: any;
   @ViewChild('search',{static: false}) searchElementRef: ElementRef;
   ngOnInit(): void {
   }
@@ -87,7 +91,14 @@ export class ClimaComponent implements OnInit {
     });
   }
 
-  fnSavePlace(){ 
+  fnGetWeather(){
+    this.weatherService.getWeatherByCoords(this.lat, this.lng).subscribe(
+      res => {
+        console.log("consulta:");
+        console.log(res);
+        this.currentWeather = res;
+      }
+    );
   }
 
 }
