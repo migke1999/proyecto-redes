@@ -1,7 +1,11 @@
+import { EmailService } from './../services/email.service';
+import { ConsultaModel } from './../models/consulta.model';
+import { InquiriesService } from './../services/inquiries.service';
 import { WeatherService } from './../services/weather.service';
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -11,11 +15,23 @@ import { Location } from '@angular/common';
 })
 export class ClimaComponent implements OnInit {
 
+  formGroup_newInquirie: FormGroup = new FormGroup({
+    _Temperatura: new FormControl(null),
+    _Sensacion_termica: new FormControl(null),
+    _Humedad: new FormControl(null),
+    _Lugar: new FormControl(null), 
+    _Latitud: new FormControl(null),
+    _Longitud: new FormControl(null),
+    _Nombre: new FormControl(null),
+  });
+
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private location: Location,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private inquiriesService: InquiriesService,
+    private emailService: EmailService
   ) { }
 
   lat: number = 21.9197223;
@@ -93,10 +109,35 @@ export class ClimaComponent implements OnInit {
 
   fnGetWeather(){
     this.weatherService.getWeatherByCoords(this.lat, this.lng).subscribe(
-      res => {
+      (res: any) => {
         console.log("consulta:");
         console.log(res);
-        this.currentWeather = res;
+        var nombre = this.emailService.getEmail();
+        console.log("nombre", nombre);
+        if(nombre!=null){
+          
+
+          var consulta= new ConsultaModel;
+          consulta.Temperatura= res.main.temp-273;
+            consulta.Humedad= res.main.humidity;
+            consulta.Sensacion_termica= res.main.feels_like -273;
+            consulta.Locacion= res.name+ ", " +res.sys.country;
+            consulta.Latitud=this.lat;
+            consulta.Longitud= this.lng;
+            consulta.Nombre= nombre;
+              //console.log("aqui va");
+          this.inquiriesService.insertInquirie(consulta)
+          .then((res) =>{
+              console.log(res);
+          }).catch(err=>{
+              console.log(err);
+          });
+          this.currentWeather = res;
+          this.currentWeather.main.temp = this.currentWeather.main.temp -273;
+          this.currentWeather.main.feels_like = this.currentWeather.main.feels_like -273;
+        }
+       
+
       }
     );
   }

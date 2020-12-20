@@ -11,6 +11,7 @@ import { AgmCoreModule } from '@agm/core';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { ConsultasComponent } from './consultas/consultas.component';
 
 // tslint:disable-next-line: one-variable-per-declaration
 
@@ -34,7 +35,8 @@ const config = {
     NavbarComponent,
     ClimaComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConsultasComponent
   ],
   imports: [
     BrowserModule,

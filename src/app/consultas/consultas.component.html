@@ -1,0 +1,34 @@
+<div class="card" style="margin:1rem;">
+    <div class="card-header"> 
+        <span class="text-uppercase">Consultas Recientes</span>
+    </div>
+     
+    
+    <div class="card-body" *ngIf="recentInquiries">
+        
+        <h4>Consultado por: {{recentInquiries[0].nombre}}</h4>
+        <table class="table table-striped mt-3">
+            <thead>
+              <tr>
+                
+                <th scope="col">Temperatura</th>
+                <th scope="col">Sensación térmica</th>
+                <th scope="col">Humedad</th>
+                <th scope="col">Lugar</th>
+                <th scope="col">Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inquirie of recentInquiries">
+                
+                <td>{{inquirie.temperatura}}°C</td>
+                <td>{{inquirie.sensacion_termica}}°C</td>
+                <td>{{inquirie.humedad}}%</td>
+                <td>{{inquirie.locacion}}</td>
+                <td>{{inquirie.fecha}}</td>
+              </tr>
+              
+            </tbody>
+          </table>
+    </div>
+</div>
